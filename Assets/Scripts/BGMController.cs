@@ -8,6 +8,7 @@ public class BGMController : MonoBehaviour
     public GameObject BGM;
     public AudioSource audio;
 
+
     void Start()
     {
         audio = BGM.GetComponent<AudioSource>();
