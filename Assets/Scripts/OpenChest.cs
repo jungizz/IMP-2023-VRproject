@@ -16,7 +16,7 @@ public class OpenChest : MonoBehaviour
         if (collision.gameObject.CompareTag("Key"))
         {
             chestAnim.SetBool("isOpen", true);
-            Invoke("CloseChest", 5f);
+            //Invoke("CloseChest", 5f);
         }
     }
 
