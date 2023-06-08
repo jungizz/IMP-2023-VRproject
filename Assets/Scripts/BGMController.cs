@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 
 public class BGMController : MonoBehaviour
 {
+    static public BGMController instance;
     public GameObject BGM;
     public AudioSource audio;
 
@@ -12,7 +13,13 @@ public class BGMController : MonoBehaviour
     void Start()
     {
         audio = BGM.GetComponent<AudioSource>();
-        DontDestroyOnLoad(this);    //keep playing audio when the scene is changed
+        //DontDestroyOnLoad(this);    //keep playing audio when the scene is changed
+
+         if(instance == null)
+         {
+            instance = this;
+             DontDestroyOnLoad(BGM);    //keep playing audio when the scene is changed
+         }else Destroy(BGM); //keep playing audio when the scene is changed
     }
 
     void Update()
