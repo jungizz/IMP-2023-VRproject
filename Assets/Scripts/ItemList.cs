@@ -9,6 +9,9 @@ public class ItemList : MonoBehaviour
     public GameObject check2;
     public GameObject check3;
     public GameObject check4;
+    public GameObject check5;
+    public GameObject check6;
+    public GameObject check7;
 
     public Text[] timeText;
     float time = 120;
@@ -70,6 +73,21 @@ public class ItemList : MonoBehaviour
             if (collision.gameObject == GameObject.Find("plant"))
             {
                 check4.SetActive(true);
+            }
+
+            if (collision.gameObject == GameObject.Find("doll3"))
+            {
+                check5.SetActive(true);
+            }
+
+            if (collision.gameObject == GameObject.Find("lighter"))
+            {
+                check6.SetActive(true);
+            }
+
+            if (collision.gameObject == GameObject.Find("smartphone"))
+            {
+                check7.SetActive(true);
             }
         }
     }
