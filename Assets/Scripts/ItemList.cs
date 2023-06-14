@@ -109,9 +109,13 @@ public class ItemList : MonoBehaviour
         }
         if(momCheck)
         {
-            mom.transform.LookAt(target);
-            Vector3 movement = new Vector3(0, 0, 2 * Time.deltaTime);
-            mom.transform.Translate(movement);
+            if (Vector3.Distance(mom.transform.position, target.transform.position) >= 1.5f)
+            {
+                mom.transform.LookAt(target);
+                Vector3 movement = new Vector3(0, 0, 2 * Time.deltaTime);
+                mom.transform.Translate(movement);
+            }
+                
         }
     }
 
