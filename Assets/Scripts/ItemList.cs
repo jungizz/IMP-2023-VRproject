@@ -24,6 +24,7 @@ public class ItemList : MonoBehaviour
     public GameObject OverText;
     public GameObject ClearText;
     private bool failCheck = true;
+    private bool successCheck = true;
 
     public GameObject timerText1;
     public GameObject timerText2;
@@ -54,7 +55,7 @@ public class ItemList : MonoBehaviour
         min = (int)time / 60;
         sec = ((int)time - min * 60) % 60;
 
-        if (itemCount >= 7)
+        if (itemCount >= 7 && successCheck)
         {
             play.Stop();
             successSound.Play();
@@ -66,6 +67,7 @@ public class ItemList : MonoBehaviour
 
             StartCoroutine(Success());
             Invoke("SuccessEnding", 4.5f);   //show the ending text after 4.5 seconds
+            successCheck = false;
         }
 
         //Timer
@@ -74,7 +76,7 @@ public class ItemList : MonoBehaviour
             timeText[0].text = 0.ToString();
             timeText[1].text = 0.ToString();
 
-            if (itemCount < 7 && failCheck == true)
+            if (itemCount < 7 && failCheck)
             {
                 play.Stop();
                 failSound.Play();
