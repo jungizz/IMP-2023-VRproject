@@ -11,16 +11,13 @@ public class OpenChest : MonoBehaviour
         chestAnim = GetComponent<Animator>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    public void OpenChestwithKey() //control by socket
     {
-        if (collision.gameObject.CompareTag("Key"))
-        {
-            chestAnim.SetBool("isOpen", true);
-            //Invoke("CloseChest", 5f);
-        }
+        chestAnim.SetBool("isOpen", true);
     }
 
-    void CloseChest()
+    public void CloseChest() //control by socket
     {
         chestAnim.SetBool("isOpen", false);
     }

@@ -119,43 +119,50 @@ public class ItemList : MonoBehaviour
         {
             if(collision.gameObject == GameObject.Find("doll1"))
             {
-                check1.SetActive(true);
+                check1.SetActive(true); 
+                collision.gameObject.tag = "Untagged";
                 itemCount++;
             }
 
             if (collision.gameObject == GameObject.Find("doll2"))
             {
                 check2.SetActive(true);
+                collision.gameObject.tag = "Untagged";
                 itemCount++;
             }
 
             if (collision.gameObject == GameObject.Find("sword"))
             {
                 check3.SetActive(true);
+                collision.gameObject.tag = "Untagged";
                 itemCount++;
             }
 
             if (collision.gameObject == GameObject.Find("plant"))
             {
                 check4.SetActive(true);
+                collision.gameObject.tag = "Untagged";
                 itemCount++;
             }
 
             if (collision.gameObject == GameObject.Find("doll3"))
             {
                 check5.SetActive(true);
+                collision.gameObject.tag = "Untagged";
                 itemCount++;
             }
 
             if (collision.gameObject == GameObject.Find("lighter"))
             {
                 check6.SetActive(true);
+                collision.gameObject.tag = "Untagged";
                 itemCount++;
             }
 
             if (collision.gameObject == GameObject.Find("smartphone"))
             {
                 check7.SetActive(true);
+                collision.gameObject.tag = "Untagged";
                 itemCount++;
             }
         }
