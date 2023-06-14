@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ItemList : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class ItemList : MonoBehaviour
     public GameObject check7;
 
     public Text[] timeText;
-    float time = 5;
+    float time = 120;
     int min, sec;
     int itemCount = 0;
 
@@ -22,20 +23,28 @@ public class ItemList : MonoBehaviour
     public GameObject SuccessText;
     public GameObject OverText;
     public GameObject ClearText;
-    public GameObject BackButton;
-    public bool successCheck = false;
-    public bool failCheck = false;
+    private bool failCheck = true;
 
     public GameObject timerText1;
     public GameObject timerText2;
     public GameObject timerText3;
     public GameObject itemPanel;
 
+    public GameObject door;
+    public Transform target;
+    public GameObject mom;
+    private bool momCheck;
+
+    public AudioSource play;
+    public AudioSource failSound;
+    public AudioSource successSound;
+
     void Start()
     {
         timeText[0].text = "02";
         timeText[1].text = "00";
         itemCount = 0;
+        play.Play();
     }
 
     void Update()
@@ -45,19 +54,18 @@ public class ItemList : MonoBehaviour
         min = (int)time / 60;
         sec = ((int)time - min * 60) % 60;
 
-        if(itemCount >= 7)
+        if (itemCount >= 7)
         {
+            play.Stop();
+            successSound.Play();
+
             timerText1.SetActive(false);
             timerText2.SetActive(false);
             timerText3.SetActive(false);
             itemPanel.SetActive(false);
 
-            //SuccessText.SetActive(true); //show the result text
-            //Destroy(SuccessText, 4f);    //remove the result text after 4 seconds
             StartCoroutine(Success());
             Invoke("SuccessEnding", 4.5f);   //show the ending text after 4.5 seconds
-
-            successCheck = true;    //not using yet
         }
 
         //Timer
@@ -65,19 +73,19 @@ public class ItemList : MonoBehaviour
         {
             timeText[0].text = 0.ToString();
             timeText[1].text = 0.ToString();
-            //Time.timeScale = 0;
-
-            failCheck = true;
 
             if (itemCount < 7 && failCheck == true)
             {
+                play.Stop();
+                failSound.Play();
+
                 timerText1.SetActive(false);
                 timerText2.SetActive(false);
                 timerText3.SetActive(false);
                 itemPanel.SetActive(false);
 
-                //FailText.SetActive(true); //show the result text
-                //Destroy(FailText, 4f);    //remove the result text after 4 seconds
+                door.transform.position = new Vector3(door.transform.position.x, door.transform.position.y, door.transform.position.z + 1);
+                momCheck = true;
                 StartCoroutine(Fail());
                 Invoke("FailEnding", 4.5f);   //show the ending text after 4.5 seconds
 
@@ -96,6 +104,12 @@ public class ItemList : MonoBehaviour
                 timeText[0].text = min.ToString();
                 timeText[1].text = sec.ToString();
             }
+        }
+        if(momCheck)
+        {
+            mom.transform.LookAt(target);
+            Vector3 movement = new Vector3(0, 0, 2 * Time.deltaTime);
+            mom.transform.Translate(movement);
         }
     }
 
@@ -150,13 +164,11 @@ public class ItemList : MonoBehaviour
     void SuccessEnding()
     {
         ClearText.SetActive(true);
-        BackButton.SetActive(true);
     }
 
     void FailEnding()
     {
         OverText.SetActive(true);
-        BackButton.SetActive(true);
     }
 
     IEnumerator Success()
@@ -171,5 +183,7 @@ public class ItemList : MonoBehaviour
         FailText.SetActive(true); //show the result text
         yield return new WaitForSeconds(4.0f);  //disable the result text after 4 seconds
         FailText.SetActive(false);
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("TiTle");
     }
 }
