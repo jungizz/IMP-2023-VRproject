@@ -21,6 +21,7 @@ public class Climb : MonoBehaviour
         continousMovement = GetComponent<ActionBasedContinuousMoveProvider>();
     }
 
+    //This script is a script where you go up holding a ladder one by one with your hands.
     void FixedUpdate()
     {
         foreach (ActionBasedController hand in climbingHands)
@@ -38,7 +39,7 @@ public class Climb : MonoBehaviour
         }
     }
 
-
+    //Set to play only when a hand held object is a ladder object
     public void GrabKnob(SelectEnterEventArgs args)
     {
         if (args.interactableObject.transform.CompareTag("Climbable"))
@@ -50,20 +51,12 @@ public class Climb : MonoBehaviour
         }
     }
 
+    //Set to play only when a hand held object is a ladder object
     public void ReleaseKnob(SelectExitEventArgs args)
     {
         if (args.interactableObject.transform.CompareTag("Climbable"))
         {
             var hand = climbingHands.Find(x => x.name == args.interactorObject.transform.gameObject.name);
-
-            //           foreach(ActionBasedController hand in climbingHands)
-            //            {
-            //                if(hand.name == args.interactorObject.transform.gameObject.name)
-            //                {
-            //                    climbingHands.Remove(hand);
-            //                    previousPositions.Remove(hand);
-            //                }
-            //            }
 
             if (hand)
             {

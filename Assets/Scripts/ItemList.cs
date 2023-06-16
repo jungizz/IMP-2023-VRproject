@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ItemList : MonoBehaviour
 {
+    //Variable to check the found object
     public GameObject check1;
     public GameObject check2;
     public GameObject check3;
@@ -14,11 +15,13 @@ public class ItemList : MonoBehaviour
     public GameObject check6;
     public GameObject check7;
 
+    //Timer Variable
     public Text[] timeText;
     float time = 120;
     int min, sec;
     int itemCount = 0;
 
+    //Ending Variable
     public GameObject FailText;
     public GameObject SuccessText;
     public GameObject OverText;
@@ -26,16 +29,19 @@ public class ItemList : MonoBehaviour
     private bool failCheck = true;
     private bool successCheck = true;
 
+    //Timer Variable2
     public GameObject timerText1;
     public GameObject timerText2;
     public GameObject timerText3;
     public GameObject itemPanel;
 
+    //Fail Ending Variable
     public GameObject door;
     public Transform target;
     public GameObject mom;
     private bool momCheck;
 
+    //sound
     public AudioSource play;
     public AudioSource failSound;
     public AudioSource successSound;
@@ -50,11 +56,13 @@ public class ItemList : MonoBehaviour
 
     void Update()
     {
+        //Time reduction
         time -= Time.deltaTime;
 
         min = (int)time / 60;
         sec = ((int)time - min * 60) % 60;
 
+        //Set it to run only once and run when all objects are found
         if (itemCount >= 7 && successCheck)
         {
             play.Stop();
@@ -76,6 +84,7 @@ public class ItemList : MonoBehaviour
             timeText[0].text = 0.ToString();
             timeText[1].text = 0.ToString();
 
+            //If you don't find it even after the time has passed, run it (failure ending)
             if (itemCount < 7 && failCheck)
             {
                 play.Stop();
@@ -94,7 +103,7 @@ public class ItemList : MonoBehaviour
                 failCheck = false;
             }
         }
-        else
+        else //Change the value displayed on the screen whenever the time keeps changing
         {
             if(sec >= 60)
             {
@@ -107,7 +116,7 @@ public class ItemList : MonoBehaviour
                 timeText[1].text = sec.ToString();
             }
         }
-        if(momCheck)
+        if(momCheck) //Set the mother object to approach the player in the event of a game failure
         {
             if (Vector3.Distance(mom.transform.position, target.transform.position) >= 1.5f)
             {
@@ -119,6 +128,7 @@ public class ItemList : MonoBehaviour
         }
     }
 
+    //When you box an object that you need to find, the screen shows that the object has been found
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Item"))

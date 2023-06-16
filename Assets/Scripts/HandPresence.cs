@@ -100,27 +100,4 @@ public class HandPresence : MonoBehaviour
         }
 
     }
-    //private void testInput()
-    //{
-
-    //    if (targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue) && primaryButtonValue)
-    //    {
-    //        Debug.Log("Primary button (A) pressed");
-    //    }
-
-    //    if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue) && triggerValue > 0.2f)
-    //    {
-    //        Debug.Log("Trigger was pressed more than 20%");
-    //    }
-
-    //    if (targetDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool trigger) && trigger)
-    //    {
-    //        Debug.Log("Trigger was pressed");
-    //    }
-
-    //    if (targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 movement) && movement != Vector2.zero)
-    //    {
-    //        Debug.Log("Joystick moved: " + movement);
-    //    }
-    //}
 }

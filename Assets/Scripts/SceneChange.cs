@@ -5,17 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //Script that changes the game scene
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void RoomScene()
     {
         SceneManager.LoadScene("Room");
